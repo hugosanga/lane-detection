@@ -48,7 +48,7 @@ def remove_horizontal_lines(lines):
         if abs(slope) >= min_slope:
             result_lines.append(line)
 
-    return result_lines
+    return np.array(result_lines)
 
 def display_lines(image, lines):
     line_image = np.zeros_like(image)
