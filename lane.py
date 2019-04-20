@@ -51,13 +51,11 @@ def remove_horizontal_lines(lines):
     return np.array(result_lines)
 
 def display_lines(image, lines):
-    line_image = np.zeros_like(image)
-
     if lines is not None:
         for x1, y1, x2, y2 in lines:
-            cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 255), 10)
+            cv2.line(image, (x1, y1), (x2, y2), (255, 0, 255), 10)
 
-    return line_image
+    return image
 
 def canny(image):
     image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -97,9 +95,7 @@ while(cap.isOpened()):
     if lines is not None:
         lines = remove_horizontal_lines(lines)
         lines = average_slope_intercept(original_image, lines)
-        line_image = display_lines(original_image, lines)
-
-        result_image = cv2.addWeighted(original_image, 0.6, line_image, 1, 0)
+        result_image = display_lines(original_image, lines)
     else:
         result_image = original_image
 
